@@ -13,7 +13,7 @@ close all;
 WaitdevtTime.TrunkWaiTime = 7;
 WaitdevtTime.FirstAbdTime = 3;
 WaitdevtTime.SecondAbdTime = 4;
-CalTimes = 30;
+CalTimes = 50;
 %对每一种情况进行30次模拟，记录完成用时。
 % for n = 1:5
 %     for i = 1:CalTimes
@@ -69,33 +69,34 @@ CalTimes = 30;
 % [q,b,c] = planesqueue(0,2,WaitdevtTime);
 % q
 
-x = 0;
-for k = 1:15
-    WaitdevtTime.FirstAbdTime = k;
-    WaitdevtTime.SecondAbdTime = k;
-    k
-    for n = 1:5
-        for i = 1:CalTimes
-            [AllTime(n,i),ABDTimes(n,i),WaitTimes(n,i)] = planesqueue(0,n,WaitdevtTime);
-            x = x + AllTime(n,i);
-        end
-        aaa(n,k) = x / CalTimes;
-        x = 0;
-    end 
-end
-i = 1:15;
-hold off
-axis([1 15,300,600]);
-plot(i,aaa(1,:),'b');
-hold on;
-plot(i,aaa(2,:),'g');
-plot(i,aaa(3,:),'r');
-plot(i,aaa(4,:),'c');
-plot(i,aaa(5,:),'m');
-legend('Random','Outside-in','ReversePyramid','Back-to-front','Order');
-title('The boarding time');
-xlabel('Abdicate Time/Δt');
-ylabel('The boarding time/Δt')
+%当放置行李的时间和让位时间发生变化的时候，登机总的时间发生的变化图
+% x = 0;
+% for k = 1:15
+%     WaitdevtTime.FirstAbdTime = k;
+%     WaitdevtTime.SecondAbdTime = k;
+%     k
+%     for n = 1:5
+%         for i = 1:CalTimes
+%             [AllTime(n,i),ABDTimes(n,i),WaitTimes(n,i)] = planesqueue(0,n,WaitdevtTime);
+%             x = x + AllTime(n,i);
+%         end
+%         aaa(n,k) = x / CalTimes;
+%         x = 0;
+%     end 
+% end
+% i = 1:15;
+% hold off
+% axis([1 15,300,600]);
+% plot(i,aaa(1,:),'b');
+% hold on;
+% plot(i,aaa(2,:),'g');
+% plot(i,aaa(3,:),'r');
+% plot(i,aaa(4,:),'c');
+% plot(i,aaa(5,:),'m');
+% legend('Random','Outside-in','ReversePyramid','Back-to-front','Order');
+% title('The boarding time');
+% xlabel('Abdicate Time/Δt');
+% ylabel('The boarding time/Δt')
 
 % 
 % %无行李时的登机时间和等待次数
@@ -184,5 +185,24 @@ ylabel('The boarding time/Δt')
 % title('等待次数3');
 
 
+%随机登机模型和outside-in模型相比较，outside-in可以优化多少\
+%步进单位s
+WaitdevtTime.TrunkWaiTime = 7;
+WaitdevtTime.FirstAbdTime = 5;
+WaitdevtTime.SecondAbdTime = 6;
+% [a,b,c] = planesqueue(0,2,WaitdevtTime);
+% a
+x = 0;
+    for n = 1:2
+        for i = 1:CalTimes
+            [AllTime(n,i),ABDTimes(n,i),WaitTimes(n,i)] = planesqueue(0,n,WaitdevtTime);
+            x = x + AllTime(n,i);
+        end
+        aaa(n)= x / CalTimes;
+        x = 0;
+    end 
+    
+    aaa
+    int16(aaa(1))-int16(aaa(2))
 
 

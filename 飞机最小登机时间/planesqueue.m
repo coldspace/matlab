@@ -7,7 +7,7 @@ function [Ti,ABDTimes,WaitTimes]=planesqueue(DR2,Randmode,WaitdevtTime)
     global RowNum;
     global RowSeatNum;
     
-    RowNum = 20; %排数
+    RowNum = 63; %排数
     RowSeatNum = 6;%列数
     WaitTimes = 0;  %等待时间，初始化为0
     
